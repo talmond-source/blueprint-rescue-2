@@ -224,7 +224,10 @@ html.mobile input{-webkit-user-select:text; user-select:text; font-size:17px}
 .mobile .hud{top:calc(var(--st) + 6px); left:calc(var(--sl) + 8px); right:calc(var(--dockW) + var(--sr) + 8px); padding:5px 8px 5px 6px; gap:8px}
 .mobile .orb{width:34px; height:34px} .mobile .hud .orb svg{width:20px; height:20px}
 .mobile .lvl .t{font-size:14.5px} .mobile .lvl .t small{font-size:10.5px; margin-right:4px} .mobile .pips i{width:14px; height:5px}
-.mobile .hud .who{display:none}
+.mobile .trnaCards{right:var(--dockW); bottom:var(--dock)}
+.mobile .hud .who{display:none} .mobile #saveBtn span{display:none} .mobile #saveBtn{width:40px; padding:0} .mobile .codein input{width:100%; min-height:46px; font-size:16px} .mobile .codein .gbtn{flex:1 1 100%; min-height:46px} .mobile .savecode{font-size:22px}
+.mobile .wheelPanel{top:calc(var(--st) + 52px); left:calc(var(--sl) + 6px); right:calc(var(--dockW) + var(--sr) + 6px); bottom:calc(var(--dock) + 6px); padding:8px 10px; grid-template-columns:1fr; grid-template-rows:auto 1fr; gap:6px}
+.mobile .wp-h, .mobile .wp-lab{display:none} .mobile .wp-side{gap:4px} .mobile .wp-codon .tile{width:40px; height:46px; font-size:24px} .mobile .wp-hint{font-size:13.5px!important; min-height:0} .mobile .wp-foot{flex-direction:row; justify-content:center}
 .mobile .scorebox{margin-left:auto; padding:4px 10px} .mobile .scorebox span{display:none} .mobile .scorebox b{font-size:17px; min-width:2ch}
 .mobile .gbtn{min-height:44px} .mobile .hud .gbtn{min-height:36px; padding:4px 10px; font-size:13px} .mobile #skipBtn{font-size:0; gap:0; width:40px; padding:0} .mobile #skipBtn svg{width:18px; height:18px} .mobile .hud .gbtn.icon{width:36px}
 .mobile .note{display:block; top:calc(var(--st) + 56px); left:calc(var(--sl) + 10px); right:auto; max-width:calc(100% - var(--dockW) - 20px); font-size:10.5px; padding:3px 9px; bottom:auto}
@@ -296,6 +299,7 @@ html.mobile input{-webkit-user-select:text; user-select:text; font-size:17px}
   .mobile .modal{place-items:center} .mobile .modal .win{width:min(560px, 94vw); border-radius:16px; max-height:94%}
   .mobile .note{display:none}
   .mobile .rhud{top:calc(var(--st) + 50px)}
+  .mobile .wheelPanel{grid-template-columns:minmax(120px,30%) 1fr; grid-template-rows:1fr} .mobile .wp-codon .tile{width:30px; height:36px; font-size:19px} .mobile .wp-foot{flex-direction:column}
 }
 
 
@@ -312,15 +316,27 @@ html.mobile input{-webkit-user-select:text; user-select:text; font-size:17px}
 .endlv{margin-top:4px; font:700 14px var(--font-body); color:var(--ink-soft)}
 @media (max-width:620px){ .acts{grid-template-columns:1fr} }
 
+/* save codes */
+.codein{display:flex; gap:8px; justify-content:center; align-items:center; margin:12px 0 0; flex-wrap:wrap}
+.codein label{font:700 13px var(--font-body); color:var(--ink-soft)}
+.codein input{width:290px; font:900 15px var(--font-display); letter-spacing:.12em; text-transform:uppercase; padding:8px 14px; border-radius:999px; border:1px solid #8ccbea; background:linear-gradient(180deg,#f3fbff,#fff); box-shadow:inset 0 2px 4px rgba(0,60,110,.15); color:var(--ink)}
+.codein .gbtn{min-height:38px; padding:6px 14px; font-size:14px}
+#codeMsg{min-height:18px; font:700 13px var(--font-body); margin:6px 0 0} #codeMsg.bad{color:#c42a3f} #codeMsg.ok{color:#2f8a0c}
+.savecode{font:900 28px var(--font-display); letter-spacing:.14em; text-align:center; color:var(--ink); padding:12px; border-radius:14px; background:#fff8e0; border:2px dashed #e3a400; margin:10px 0; word-break:break-all}
 /* codon wheel panel */
-.wheelPanel{position:absolute; right:max(16px,env(safe-area-inset-right)); top:84px; bottom:128px; width:min(420px,40vw); z-index:5; padding:10px 14px 12px; display:flex; flex-direction:column; gap:6px}
+.wheelPanel{position:absolute; left:max(16px,env(safe-area-inset-left)); right:max(16px,env(safe-area-inset-right)); top:72px; bottom:var(--capH,132px); z-index:7; padding:14px 18px; display:grid; grid-template-columns:minmax(230px,310px) 1fr; gap:18px; background:rgba(255,255,255,.93)}
+.wp-side{display:flex; flex-direction:column; justify-content:center; gap:12px; min-width:0}
+.wp-lab{text-align:center; font:800 11.5px var(--font-display); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint)}
+.wp-codon .tile{width:58px; height:68px; font-size:36px; border-radius:14px}
+.wp-hint{font-size:16.5px!important; line-height:1.4; text-align:center; min-height:3em}
+.wp-foot{display:flex; flex-direction:column; align-items:center; gap:10px}
 .wp-h{font:900 16px var(--font-display); color:#0778b8; text-align:center}
 .wp-codon{display:flex; justify-content:center; align-items:center; gap:5px}
 .wp-codon .end{font:800 14px var(--font-display); color:var(--aqua-deep)}
 .wp-codon .tile{transition:transform .15s} .wp-codon .tile.cur{transform:scale(1.15); outline:3px solid #ffb81c; outline-offset:2px} .wp-codon .tile.done{opacity:.55}
 .tile.bU{background:linear-gradient(180deg,#f1e2ff,#c99cff)}
-.wheelHost{flex:1; min-height:0; display:grid; place-items:center}
-.wheel-svg{width:100%; height:100%; max-height:100%; overflow:visible; touch-action:manipulation}
+.wheelHost{min-height:0; min-width:0; display:grid; place-items:center; position:relative}
+.wheel-svg{width:100%; height:100%; max-height:100%; overflow:visible; touch-action:manipulation; position:absolute; inset:0}
 .w-sec{stroke:#fff; stroke-width:1.1; cursor:pointer; transition:opacity .2s, filter .2s}
 .w-sec:hover{filter:brightness(1.12)}
 .w-sec.dim,.w-t.dim{opacity:.18}
@@ -375,7 +391,8 @@ html.mobile input{-webkit-user-select:text; user-select:text; font-size:17px}
 .trip .cd i.bA{background:#ffb3c6} .trip .cd i.bU{background:#dcc0ff} .trip .cd i.bG{background:#9af0bf} .trip .cd i.bC{background:#a6d6ff}
 .trip .aa{font:800 12px var(--font-display); padding:0 6px; border-radius:999px; background:var(--c); color:#0d3550}
 .fp-row.bad .trip{border-color:#f7b6be}
-@media (max-width:760px){ .wheelPanel{width:auto; left:12px; right:12px; top:auto; bottom:12px; height:58vh} .fp-l{width:96px} }
+@media (max-width:760px), (max-aspect-ratio:1/1){ .wheelPanel{grid-template-columns:1fr; grid-template-rows:auto 1fr; gap:8px; padding:10px 12px; left:10px; right:10px; top:66px}
+  .wp-side{gap:6px} .wp-h{display:none} .wp-lab{display:none} .wp-codon .tile{width:44px; height:50px; font-size:27px} .wp-hint{font-size:14.5px!important; min-height:0} .fp-l{width:96px} }
 
 
 /* Level 7 */
@@ -419,7 +436,12 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
 .cs-q{margin:10px 0 6px}
 .cs-step1{display:flex; flex-wrap:wrap; gap:10px; align-items:center} .cs-step1 label{font:800 16px var(--font-display); display:flex; gap:6px; align-items:center}
 .cs-step1 select{font:600 15px var(--font-body); padding:6px 10px; border-radius:10px; border:1px solid #8ccbea}
-.cs-mini{height:220px; margin:8px 0} .cs-mini .wheel-svg{height:220px}
+.win.case{width:min(1060px,100%)}
+.win.case .winbody{display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,46%); column-gap:20px; align-items:start}
+.win.case .winbody > *{grid-column:1}
+.cs-mini{grid-column:2!important; grid-row:1 / span 30; position:sticky; top:0; width:100%; aspect-ratio:1; margin:0}
+.cs-mini .wheel-svg{position:static; width:100%; height:100%}
+@media (max-width:760px){ .win.case .winbody{grid-template-columns:1fr} .cs-mini{grid-column:1!important; grid-row:auto; position:static; max-width:420px; margin:8px auto} }
 .cs-types{display:grid; grid-template-columns:1fr 1fr; gap:8px} .cs-types .opt small{font:500 13px var(--font-body); color:var(--ink-soft)}
 .trip.chg{border-color:#f39aa6; background:#fff1f2} .trip .cd i.ins{outline:2px solid #e8374f}
 @media (max-width:620px){ .cs-types{grid-template-columns:1fr} }
@@ -428,6 +450,9 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
 /* Level 9: anime + gothic mystery */
 .anime{position:absolute; inset:0; z-index:14; background:#06020f}
 .anime canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+.an-subs{position:absolute; left:max(12px,env(safe-area-inset-left)); right:max(12px,env(safe-area-inset-right)); bottom:calc(92px + env(safe-area-inset-bottom)); z-index:2; display:flex; flex-direction:column; gap:8px; pointer-events:none}
+.an-subs p{margin:0; padding:10px 14px; border-radius:16px; background:#fff; border:3px solid #140a2a; color:#140a2a; font:900 17px/1.3 var(--font-display); box-shadow:4px 4px 0 #140a2a}
+.an-subs p.nar{background:#fffbe8; border-radius:4px; font:800 15.5px/1.35 var(--font-body)} .an-subs p.shout{color:#b8001f}
 .an-skip{position:absolute; right:max(16px,env(safe-area-inset-right)); top:calc(16px + env(safe-area-inset-top)); z-index:2}
 .an-next{position:absolute; right:max(20px,env(safe-area-inset-right)); bottom:calc(20px + env(safe-area-inset-bottom)); z-index:2; font:900 20px var(--font-display); padding:12px 26px; border-radius:999px; border:3px solid #140a2a; background:#ffe14d; color:#140a2a; cursor:pointer; box-shadow:4px 4px 0 #140a2a; opacity:.55; transition:opacity .2s, transform .1s}
 .an-next.ready{opacity:1; animation:annext 1s ease-in-out infinite} .an-next:active{transform:translate(2px,2px); box-shadow:2px 2px 0 #140a2a}
@@ -486,6 +511,7 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
     <div class="who" id="playerName"></div>
     <div class="scorebox" id="scoreBox"><span>Score</span><b id="score">0</b></div>
     <button class="gbtn ghost" id="skipBtn" hidden title="Skip this animation">Skip <svg viewBox="0 0 20 20"><path d="M3 4l7 6-7 6zM10 4l7 6-7 6z" fill="currentColor"/></svg></button>
+    <button class="gbtn ghost" id="saveBtn" title="Get a save code so you can finish later"><svg viewBox="0 0 20 20"><path d="M3 3h11l3 3v11H3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 3v5h7V3M6 17v-5h8v5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Save</span></button>
     <button class="gbtn ghost icon" id="muteBtn" aria-pressed="false" title="Sound on/off"></button>
   </header>
 
@@ -535,6 +561,8 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
     </div>
     <button class="gbtn green" id="startBtn">Play all 9 levels &#9656;</button>
     <p class="warn" id="nameWarn" hidden>Type your name first, so it shows on your certificate.</p>
+    <div class="codein"><label for="codeIn">Have a save code?</label><input id="codeIn" maxlength="20" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false"><button class="gbtn" id="codeBtn">Continue</button></div>
+    <p id="codeMsg"></p>
     <div class="resume" id="resume" hidden><button class="gbtn ghost" id="resumeBtn"><span id="resumeTxt"></span></button></div>
     <p class="by" style="margin:12px 0 0">Your teacher will tell you which act to play. Sound on!</p>
     <div class="teacher">Teacher preview (no certificate):<button data-jump="1">1</button><button data-jump="2">2</button><button data-jump="3">3</button><button data-jump="4">4</button><button data-jump="5">5</button><button data-jump="6">6</button><button data-jump="7">7</button><button data-jump="8">8</button><button data-jump="9">9</button> &middot; <a href="#" id="teacherLink">Check a completion code</a></div>
@@ -552,6 +580,10 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
     <button class="gbtn ghost" id="againBtn">Play again</button>
   </div></div>
 
+  <div class="modal" id="saveModal" hidden><div class="win"><div class="winbar"><span class="dot"></span>Save your progress</div><div class="winbody">
+    <div id="saveBody"></div>
+    <div class="winfoot" style="gap:10px"><button class="gbtn ghost" id="saveQuit">Quit to main menu</button><button class="gbtn green" id="saveClose">Keep playing</button></div>
+  </div></div></div>
   <div class="modal" id="teacher" hidden><div class="win"><div class="winbar"><span class="dot"></span>Check a completion code</div><div class="winbody">
     <div class="tform"><label for="tName">Student name</label><input id="tName"><label for="tScore">Score</label><input id="tScore" inputmode="numeric"><label for="tDate">Date</label><input id="tDate" type="date"><label for="tCode">Code</label><input id="tCode"></div>
     <div id="tResult"></div>
@@ -561,11 +593,14 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
 
   <!-- Level 6: codon wheel, tRNA cards, start strip, reading frames -->
   <div class="wheelPanel glass" id="wheelPanel" hidden>
-    <div class="wp-h">Codon wheel</div>
-    <div class="wp-codon" id="wheelCodon"></div>
+    <div class="wp-side">
+      <div class="wp-h">Codon wheel</div>
+      <div class="wp-lab">Codon to decode</div>
+      <div class="wp-codon" id="wheelCodon"></div>
+      <div class="wp-hint" id="wheelHint"></div>
+      <div class="wp-foot"><div class="wp-result" id="wheelResult" hidden></div><button class="gbtn ghost" id="wheelShow" hidden>Show me</button></div>
+    </div>
     <div class="wheelHost" id="wheelHost"></div>
-    <div class="wp-hint" id="wheelHint"></div>
-    <div class="wp-foot"><div class="wp-result" id="wheelResult" hidden></div><button class="gbtn ghost" id="wheelShow" hidden>Show me</button></div>
   </div>
   <div class="trnaCards" id="trnaCards" hidden></div>
   <div class="startStrip glass" id="startStrip" hidden></div>
@@ -589,7 +624,7 @@ kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; paddin
   <div class="modal" id="caseBox" hidden></div>
 
   <!-- Level 9: anime cinematic + mystery -->
-  <div class="anime" id="anime" hidden><canvas id="animeCanvas"></canvas><button class="gbtn ghost an-skip" id="animeSkip">Skip story</button><button class="an-next" id="animeNext" aria-label="Next">Next &#9656;</button></div>
+  <div class="anime" id="anime" hidden><canvas id="animeCanvas"></canvas><button class="gbtn ghost an-skip" id="animeSkip">Skip story</button><div class="an-subs" id="animeSubs" hidden></div><button class="an-next" id="animeNext" aria-label="Next">Next &#9656;</button></div>
   <div class="mystery" id="mystery" hidden></div>
   <div class="dock" id="dock"></div>
   <div class="flash" id="flash"></div>
@@ -2105,7 +2140,7 @@ function labLayout(W, o) {
 }
 
 /* ================= LEVEL 5: Base Pair Rush (rhythm game) ================= */
-const LANES = ["A", "T", "G", "C"], LX = [-3.3, -1.1, 1.1, 3.3], SPEED = 14, WIN = { perfect: 0.07, great: 0.12, good: 0.17 };
+const LANES = ["A", "T", "G", "C"], LX = [-3.3, -1.1, 1.1, 3.3], SPEED = 11, WIN = { perfect: 0.08, great: 0.13, good: 0.19 };
 /* phones held upright: fit all four lanes across the screen at the strike line */
 function mobRhythmCam(pulse, xs) { const asp = stage.w / stage.h, D = Math.hypot(7.5, 9); const fov = clamp((2 * Math.atan(5.2 / D / asp) * 180) / Math.PI, 50, 84); return { p: V3(xs, 7.5 + pulse, 9), l: V3(0, 0, -5), fov, noMob: true }; }
 function buildRhythmWorld() {
@@ -2175,8 +2210,9 @@ function chart(round, slow, r) {
   const notes = []; const bars = 16;
   for (let b = 0; b < bars; b++) {
     let beats;
-    if (round === 1) beats = b < 4 ? [0, 2] : b < 10 ? [0, 2, 3] : [0, 1, 2, 3];
-    else beats = b < 2 ? [0, 2] : b < 8 ? [0, 1, 2] : b % 2 ? [0, 1, 2, 3] : [0, 1, 2, 2.5, 3];
+    // slowed for classroom play: mostly half and three-quarter bars, full bars only at the very end
+    if (round === 1) beats = b < 6 ? [0, 2] : b < 14 ? [0, 2, 3] : [0, 1, 2, 3];
+    else beats = b < 4 ? [0, 2] : b < 12 ? [0, 1, 2] : [0, 1, 2, 3];
     for (const q of beats) notes.push({ beat: 8 + b * 4 + q });
   }
   let prev = -1, run = 0;
@@ -2185,7 +2221,7 @@ function chart(round, slow, r) {
 }
 async function rhythmRound(W, round, slow) {
   const rule = round === 1 ? PAIR_DNA : PAIR_RNA;
-  const bpm = (round === 1 ? 96 : 102) * (slow ? 0.85 : 1);
+  const bpm = (round === 1 ? 76 : 82) * (slow ? 0.85 : 1);
   const song = new Song(bpm, 20, round === 1 ? "70s" : "80s"); const r = mulberry(G.seed + round * 101 + (slow ? 7 : 0));
   const notes = chart(round, slow, r).map((n) => Object.assign(n, { t: n.beat * song.beat, base: LANES[n.lane], key: rule[LANES[n.lane]], judged: null }));
   const st = { score: 0, combo: 0, maxCombo: 0, hits: 0, perfect: 0, great: 0, good: 0, miss: 0, wrong: 0, built: 0 };
@@ -3468,6 +3504,7 @@ function drawProteo(c, o, t) {
 }
 /* speech bubble: style round | shout | think ; tail points at (tx,ty) */
 function bubble(c, text, x, y, w, tx, ty, style = "round", size = 34) {
+  if (AN.texts) AN.texts.push({ text, cls: style === "shout" ? "shout" : "" });
   c.save(); c.font = FONT(900, size); const words = text.split(" "), lines = []; let line = "";
   for (const wd of words) { const tst = line ? line + " " + wd : wd; if (c.measureText(tst).width > w - 50 && line) { lines.push(line); line = wd; } else line = tst; } lines.push(line);
   const lh = size * 1.18, h = lines.length * lh + 44, bw = Math.min(w, Math.max(...lines.map((l) => c.measureText(l).width)) + 60);
@@ -3487,6 +3524,7 @@ function bubble(c, text, x, y, w, tx, ty, style = "round", size = 34) {
   c.restore();
 }
 function narration(c, text, x = 40, y = 40, w = 760) {
+  if (AN.texts) AN.texts.push({ text, cls: "nar" });
   c.save(); c.font = FONT(800, 30); const words = text.split(" "), lines = []; let line = "";
   for (const wd of words) { const tst = line ? line + " " + wd : wd; if (c.measureText(tst).width > w - 40 && line) { lines.push(line); line = wd; } else line = tst; } lines.push(line);
   const h = lines.length * 38 + 30; c.fillStyle = "#fffbe8"; c.strokeStyle = "#140a2a"; c.lineWidth = 5; c.fillRect(x, y, w, h); c.strokeRect(x, y, w, h);
@@ -3574,14 +3612,17 @@ async function playAnime() {
       const t0 = T; let doneAt = null;
       hold((TT) => {
         const c = AN.cx, u = clamp((TT - t0) / sh.d);
-        P(c); c.clearRect(0, 0, AN.cv.width, AN.cv.height); sh.draw(c, u, TT); P(c);
+        AN.texts = []; P(c); c.clearRect(0, 0, AN.cv.width, AN.cv.height); sh.draw(c, u, TT); P(c);
+        // tall phone screens: the 16:9 story frame is small, so repeat its words as big subtitles underneath
+        const subs = $("#animeSubs"), tall = MOBILE && AN.cv.height > AN.cv.width; subs.hidden = !tall;
+        if (tall) { const key = AN.texts.map((x) => x.text).join("|"); if (key !== AN.subKey) { AN.subKey = key; subs.innerHTML = AN.texts.map((x) => `<p class="${x.cls}">${x.text}</p>`).join(""); } }
         nxt.classList.toggle("ready", u >= 1);
         if ((u >= 1 && (tapped || window.__auto)) || skipAll || (tapped && u > 0.2 && !doneAt)) { if (tapped && u < 1 && !doneAt) { doneAt = TT; } res(); }
         return { cam: { p: V3(0, 0, 40), l: V3(0, 0, 0), fov: 40 } };
       });
     });
   }
-  AN.shake = 0; ov.hidden = true;
+  AN.shake = 0; ov.hidden = true; $("#animeSubs").hidden = true; AN.subKey = null;
 }
 
 /* ================= LEVEL 9: Mom's Line (endosymbiosis cinematic + the Ashgrove family mystery) ================= */
@@ -3801,13 +3842,13 @@ const WORLD_BUILDERS = { cell: () => buildCellWorld(), spool: () => buildSpoolWo
 const NLEVELS = 9;
 const ACTS = [{ n: 1, from: 1, to: 5, name: "The Blueprint" }, { n: 2, from: 6, to: 8, name: "Gene to Protein" }, { n: 3, from: 9, to: 9, name: "Mom's Line" }];
 // highest score a strong player reaches on each level (for the certificate rank)
-const LEVEL_MAX = { 1: 600, 2: 580, 3: 680, 4: 100, 5: 34400, 6: 3600, 7: 4200, 8: 5200, 9: 3400 };
+const LEVEL_MAX = { 1: 600, 2: 580, 3: 680, 4: 100, 5: 29000, 6: 3600, 7: 4200, 8: 5200, 9: 3400 };
 function useWorld(name) {
   if (!worlds[name]) { worlds[name] = WORLD_BUILDERS[name](); stage.scene.add(worlds[name].root); }
   for (const k in worlds) worlds[k].root.visible = k === name;
   cur = worlds[name]; cur.name = name; stage.labels.clear(); stage.labels.setCounter(null); stage.resetOrbit();
   const bg = cur.bg || { cell: ["#2fb2f2", "#e4f9ff", "#cfefff", 600, 2600], spool: ["#1b79c4", "#a6e6ff", "#8fd6ff", 60, 220], lab: ["#2aa6ee", "#e9fcff", "#cdeeff", 40, 140], rhythm: ["#1d9be8", "#f2fff2", "#d8f6ff", 60, 170] }[name];
-  stage.setBackground(bg[0], bg[1], bg[2], bg[3], bg[4]);
+  stage.setBackground(bg[0], bg[1], bg[2], bg[3], bg[4]); cur.fogBase = [bg[3], bg[4]];
   return cur;
 }
 function setNote(t) { scaleNote.hidden = !t; if (t) scaleNote.textContent = t; }
@@ -3822,6 +3863,8 @@ const sleep = (s) => { const f = frameFn || (() => ({})); return beat(s, (u, TT)
 /* ---------- caption + continue ---------- */
 const cap = $("#caption"), capText = $("#capText"), contBtn = $("#contBtn");
 function say(html, cls) { capText.innerHTML = html; cap.className = "caption glass " + (cls || ""); cap.hidden = !html; }
+function capSize() { const h = cap.hidden ? 16 : cap.getBoundingClientRect().height + 28; document.documentElement.style.setProperty("--capH", (MOBILE ? 8 : h) + "px"); }
+new ResizeObserver(capSize).observe(cap);
 let contRes = null;
 function cont(label = "Continue") {
   return new Promise((res) => { contBtn.querySelector("span").textContent = label; contBtn.hidden = false; contBtn.focus({ preventScroll: true }); contRes = () => { contBtn.hidden = true; contRes = null; SND.click(); res(); }; if (window.__auto) setTimeout(() => contRes && contRes(), window.__autoDelay || 30); });
@@ -3836,7 +3879,43 @@ function addScore(n, at) {
 function setLevel(n, title) {
   G.level = n; $("#lvlNum").textContent = Math.min(n, NLEVELS); $("#lvlTitle").textContent = title; $(".lvl .t small").hidden = n > NLEVELS;
   document.querySelectorAll(".pips i").forEach((p, i) => { p.className = i + 1 < n ? "done" : i + 1 === n ? "cur" : ""; });
+  if (n <= NLEVELS) G.snap = { level: n, score: G.score, stats: JSON.parse(JSON.stringify(G.stats)) };
   save();
+}
+/* ---------- save codes: 16 characters a student can write down ---------- */
+const B32 = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";   // no I, L, O, U
+const nameKey = (n) => (n || "").trim().toLowerCase().replace(/[^a-z]/g, "");
+function fnv(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+const CODE_FIELDS = [["ver", 1], ["level", 4], ["act", 2], ["score", 14], ["qF", 6], ["qT", 6], ["ty", 7], ["tyOk", 7], ["r1", 7], ["r2", 7], ["seed", 6], ["nh", 6]];
+const actIndex = (from, to) => { const k = ACTS.findIndex((a) => a.from === from && a.to === to); return k < 0 ? 0 : k + 1; };
+function makeCode(name, snap, from, to, seed) {
+  const st = snap.stats, rd = st.rounds || {};
+  const d = { ver: 1, level: snap.level, act: actIndex(from, to), score: Math.round(snap.score / 5), qF: st.qFirst, qT: st.qTotal, ty: st.typed, tyOk: st.typedOk, r1: rd.r1 ? rd.r1.acc : 127, r2: rd.r2 ? rd.r2.acc : 127, seed: seed & 63, nh: fnv(nameKey(name)) & 63 };
+  let v = 0n; for (const [k, b] of CODE_FIELDS) v = (v << BigInt(b)) | BigInt(Math.max(0, Math.min(2 ** b - 1, Math.round(d[k] || 0))));
+  const chk = fnv("br2" + v.toString(36)) & 127; v = (v << 7n) | BigInt(chk);
+  let s = ""; for (let i = 0; i < 16; i++) { s = B32[Number(v & 31n)] + s; v >>= 5n; }
+  return s.match(/.{4}/g).join("-");
+}
+function readCode(str, name) {
+  const s = (str || "").toUpperCase().replace(/O/g, "0").replace(/[IL]/g, "1").replace(/U/g, "V").replace(/[^0-9A-Z]/g, "");
+  if (s.length !== 16) return { err: "A save code has 16 letters and numbers, like 4K7Q-M2XA-9TB3-R8WD." };
+  let v = 0n; for (const ch of s) { const k = B32.indexOf(ch); if (k < 0) return { err: "That code has a character that can't be in a save code. Check it again." }; v = (v << 5n) | BigInt(k); }
+  const chk = Number(v & 127n); v >>= 7n;
+  if ((fnv("br2" + v.toString(36)) & 127) !== chk) return { err: "That code doesn't check out. One of the characters is probably copied wrong." };
+  const d = {}; for (let i = CODE_FIELDS.length - 1; i >= 0; i--) { const [k, b] = CODE_FIELDS[i]; d[k] = Number(v & BigInt(2 ** b - 1)); v >>= BigInt(b); }
+  if (d.ver !== 1 || d.level < 1 || d.level > NLEVELS) return { err: "That code doesn't check out." };
+  if ((fnv(nameKey(name)) & 63) !== d.nh) return { err: "This code was made with a different name. Type your name exactly the way you did before." };
+  const act = d.act ? ACTS[d.act - 1] : { from: 1, to: NLEVELS }; const rounds = {};
+  if (d.r1 <= 100) rounds.r1 = { acc: d.r1 }; if (d.r2 <= 100) rounds.r2 = { acc: d.r2 };
+  return { level: d.level, from: act.from, to: act.to, score: d.score * 5, seed: d.seed, stats: { qFirst: d.qF, qTotal: d.qT, typed: d.ty, typedOk: d.tyOk, rounds } };
+}
+function showSave() {
+  const m = $("#saveModal"), body = $("#saveBody");
+  if (G.practice || !G.snap) body.innerHTML = "<p>Teacher preview mode doesn't make save codes.</p>";
+  else { const code = makeCode(G.name, G.snap, G.from || 1, G.to || NLEVELS, G.seed);
+    body.innerHTML = `<p>Write this code down (or take a picture). It brings <b>${G.name || "you"}</b> back to the <b>start of Level ${G.snap.level}</b> with ${G.snap.score.toLocaleString()} points.</p><div class="savecode">${code}</div>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0">To continue later: open the game, type the same name, enter the code and press <b>Continue</b>. This device also remembers your spot automatically.</p>`; }
+  m.hidden = false; SND.click();
 }
 function save() { if (G.practice) return; try { localStorage.setItem(SAVE_KEY, JSON.stringify({ name: G.name, score: G.score, level: G.level, stats: G.stats, seed: G.seed, from: G.from, to: G.to })); } catch (e) {} }
 
@@ -3944,9 +4023,9 @@ function frame(dt, skipRender) {
     if (cur.bubbles) cur.bubbles.tick(T);
     const out = (frameFn && frameFn(T)) || {};
     if (cur.tick) cur.tick(dt, T);
-    if (out.cam) { const c = out.cam; if (shake.amt > 0) { c.p = c.p.clone().add(V3((Math.random() - 0.5) * shake.amt, (Math.random() - 0.5) * shake.amt, 0)); shake.amt *= 0.9; } const asp = stage.w / stage.h;
+    if (out.cam) { const c = Object.assign({}, out.cam); /* copy: levels may hand back the same camera object every frame */ if (shake.amt > 0) { c.p = c.p.clone().add(V3((Math.random() - 0.5) * shake.amt, (Math.random() - 0.5) * shake.amt, 0)); shake.amt *= 0.9; } const asp = stage.w / stage.h;
       if (MOBILE) { if (asp < 1.5 && !c.noMob) { const f0 = ((c.fov || 40) * Math.PI) / 360, need = (c.mobTarget || 1.25) / asp, f1 = Math.min(Math.atan(Math.tan(f0) * need), (36 * Math.PI) / 180), dolly = Math.min(2.4, (Math.tan(f0) * need) / Math.tan(f1));
-          c.fov = (f1 * 360) / Math.PI; if (dolly > 1.001) c.p = c.l.clone().add(c.p.clone().sub(c.l).multiplyScalar(dolly)); } }
+          c.fov = (f1 * 360) / Math.PI; if (dolly > 1.001) c.p = c.l.clone().add(c.p.clone().sub(c.l).multiplyScalar(dolly)); if (stage.scene.fog && cur.fogBase && cur.fogBase[1]) { const d = Math.max(1, dolly); stage.scene.fog.near = cur.fogBase[0] * d; stage.scene.fog.far = cur.fogBase[1] * d; } } }
       else if (asp < 1.45) c.fov = Math.min(100, (2 * Math.atan(Math.tan(((c.fov || 40) * Math.PI) / 360) * (1.6 / asp)) * 180) / Math.PI);
       stage.setCam(c); }
     if (!skipRender) {
@@ -4305,6 +4384,7 @@ function startGame(from, practice, to = NLEVELS) {
   G.name = $("#nameIn").value.trim(); G.practice = !!practice;
   $("#title").hidden = true; $("#hud").hidden = false; $("#playerName").textContent = G.name || "Student";
   if (practice) $("#playerName").textContent += " (practice)";
+  $("#saveBtn").hidden = !!practice;
   run(from, to);
 }
 (function boot() {
@@ -4319,6 +4399,15 @@ function startGame(from, practice, to = NLEVELS) {
   document.querySelectorAll("[data-act]").forEach((b) => (b.onclick = () => { const a = ACTS[+b.dataset.act - 1]; go(a.from, a.to); }));
   $("#nameIn").addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
   document.querySelectorAll("[data-jump]").forEach((b) => (b.onclick = () => { G.score = 0; if (!$("#nameIn").value.trim()) $("#nameIn").value = "Teacher"; const n = +b.dataset.jump; const a = ACTS.find((x) => n >= x.from && n <= x.to); startGame(n, true, a.to); }));
+  $("#saveBtn").onclick = () => showSave();
+  $("#saveClose").onclick = () => { $("#saveModal").hidden = true; SND.click(); };
+  $("#saveQuit").onclick = () => location.reload();
+  $("#codeBtn").onclick = () => { const msg = $("#codeMsg"); SND.init();
+    if (!$("#nameIn").value.trim()) { msg.className = "bad"; msg.textContent = "Type your name first (the same way you typed it before)."; $("#nameIn").focus(); return; }
+    const r = readCode($("#codeIn").value, $("#nameIn").value); if (r.err) { msg.className = "bad"; msg.textContent = r.err; SND.wrong(); return; }
+    msg.className = "ok"; msg.textContent = `Welcome back! Starting Level ${r.level}\u2026`;
+    setTimeout(() => { G.score = r.score; G.stats = r.stats; G.seed = r.seed; $("#score").textContent = G.score.toLocaleString(); startGame(r.level, false, r.to); G.from = r.from; }, 500); };
+  $("#codeIn").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#codeBtn").click(); });
   $("#skipBtn").onclick = () => { skipReq = true; };
   $("#muteBtn").onclick = () => { SND.setMuted(!SND.muted); $("#muteBtn").setAttribute("aria-pressed", SND.muted); $("#muteBtn").innerHTML = SND.muted ? ICON.mute : ICON.sound; };
   $("#muteBtn").innerHTML = ICON.sound;
@@ -4328,6 +4417,7 @@ function startGame(from, practice, to = NLEVELS) {
   $("#tDate").value = localDay(new Date());
   $("#againBtn").onclick = () => location.reload();
   window.addEventListener("keydown", (e) => {
+    if (e.target && e.target.matches && e.target.matches("input,select,textarea")) return;
     if (!quiz.hidden) { const n = "1234".indexOf(e.key) >= 0 ? "1234".indexOf(e.key) : "abcd".indexOf(e.key.toLowerCase()); if (n >= 0 && quiz.dataset.done !== "1" && !(typing && !typing.hidden)) { quiz._pick(n); e.preventDefault(); } else if ((e.key === "Enter" || e.key === " ") && !$("#quizNext").hidden) { $("#quizNext").click(); e.preventDefault(); } return; }
     if ((e.key === "Enter" || e.key === " ") && contRes && typing.hidden) { e.preventDefault(); contRes(); }
   });
